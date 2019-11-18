@@ -1,0 +1,29 @@
+{
+  "name": "restful-library-catalog",
+  "version": "1.0.0",
+  "description": "A basic, MVC implementation of a RESTful book catalog",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "devStart": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charlesmartinreed/restful-library-catalog.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/charlesmartinreed/restful-library-catalog/issues"
+  },
+  "homepage": "https://github.com/charlesmartinreed/restful-library-catalog#readme",
+  "dependencies": {
+    "ejs": "^2.7.2",
+    "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  }
+}
