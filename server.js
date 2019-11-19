@@ -6,6 +6,7 @@ if (process.env.NODE_ENV !== "production") {
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const indexRouter = require("./routes/index");
+const authorRouter = require("./routes/authors");
 
 const app = express();
 
@@ -31,7 +32,8 @@ MONGODB/MONGOOSE SETUP
 */
 const mongoose = require("mongoose");
 mongoose.connect(process.env.DATABASE_URL, {
-  useNewUrlParser: true
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 });
 const db = mongoose.connection;
 db.on("error", error => console.error(error));
@@ -43,6 +45,7 @@ PATH ROUTES
 ======================
 */
 app.use("/", indexRouter);
+app.use("/authors", authorRouter);
 
 /*
 ======================
