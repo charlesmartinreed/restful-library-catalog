@@ -8,8 +8,29 @@ ROUTE - GET ALL AUTHORS
 ====================
 */
 
-router.get("/", (req, res) => {
-  res.render("authors/index");
+router.get("/", async (req, res) => {
+  let searchOptions = {};
+
+  // get request sends information through query strings, post sends through the body
+  if (req.query.author_name !== null && req.query.author_name !== "") {
+    // case insensitive, allows partial searches
+    searchOptions.name = new RegExp(req.query.author_name, "i");
+  }
+  try {
+    // passing the object with no conditions (empty object) grabs all the authors
+    const authors = await Author.find(searchOptions);
+
+    res.render("authors/index", {
+      authors: authors,
+      searchOptions: req.query
+    });
+  } catch (error) {
+    // database not accessible
+    console.log(error);
+    res.redirect("/", {
+      errorMessage: "Database not currently accessible"
+    });
+  }
 });
 
 /*
