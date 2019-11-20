@@ -9,10 +9,6 @@
   </head>
   <!-- the ejs template tag below is importing the contents of the body tag from our ejs pages -->
   <body>
-    Before
-    <br />
-    <%- body %>
-    <br />
-    After
+    <%- include('../partials/header.ejs') %> <%- body %>
   </body>
 </html>
