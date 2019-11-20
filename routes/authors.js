@@ -28,24 +28,23 @@ router.get("/new", (req, res) => {
 ROUTE - POST NEW AUTHOR
 ====================
 */
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   // note that we're grabbing the author name through express' built-in parser - see the app.use call in server.js
 
   const author = new Author({
     name: req.body.author_name
   });
 
-  author.save((err, newAuthor) => {
-    if (err) {
-      res.render("authors/new", {
-        author: author,
-        errorMessage: "Error creating new Author"
-      });
-    } else {
-      //   res.redirect(`authors/${newAuthor.id}`);
-      res.redirect("authors");
-    }
-  });
+  try {
+    const newAuthor = await author.save();
+    //   res.redirect(`authors/${newAuthor.id}`);
+    res.redirect("authors");
+  } catch (error) {
+    res.render("authors/new", {
+      author: author,
+      errorMessage: "Error creating new Author"
+    });
+  }
 });
 
 module.exports = router;
